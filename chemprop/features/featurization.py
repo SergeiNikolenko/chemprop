@@ -333,6 +333,7 @@ class MolGraph:
         :param overwrite_default_atom_features: Boolean to overwrite default atom features by atom_features instead of concatenating.
         :param overwrite_default_bond_features: Boolean to overwrite default bond features by bond_features instead of concatenating.
         """
+        self.original_mol = mol
         self.is_mol = is_mol(mol)
         self.is_reaction = is_reaction(self.is_mol)
         self.is_explicit_h = is_explicit_h(self.is_mol)
@@ -509,7 +510,40 @@ class MolGraph:
                     self.b2a.append(a2)
                     self.b2revb.append(b2)
                     self.b2revb.append(b1)
-                    self.n_bonds += 2                
+                    self.n_bonds += 2
+
+        if self.is_mol:
+            if isinstance(mol, str):
+                self.mol = Chem.MolFromSmiles(mol)  # Convert SMILES to RDKit Mol object
+            elif isinstance(mol, Chem.Mol):
+                self.mol = mol  # Directly use the RDKit Mol object
+        else:
+            # For reactions, you might want to store both reactant and product as a tuple
+            if isinstance(mol, tuple) and all(isinstance(m, Chem.Mol) for m in mol):
+                self.mol = mol  # Store the tuple of RDKit Mol objects for reactants and products
+            elif isinstance(mol, str):
+                reactant_smiles, product_smiles = mol.split(">")
+                self.mol = (Chem.MolFromSmiles(reactant_smiles.strip()), Chem.MolFromSmiles(product_smiles.strip()))
+            else:
+                raise ValueError("Invalid molecule or reaction format.")
+
+    def get_adjacency_matrix(self) -> torch.Tensor:
+        """Generates an adjacency matrix for a molecule or a reaction."""
+        if isinstance(self.original_mol, Chem.Mol):
+            mol = self.original_mol
+        elif isinstance(self.original_mol, tuple) and all(isinstance(m, Chem.Mol) for m in self.original_mol):
+            mol = self.original_mol[0] 
+        elif isinstance(self.original_mol, str):
+            mol = Chem.MolFromSmiles(self.original_mol)
+        else:
+            raise ValueError("Invalid molecule format for computing adjacency matrix.")
+
+        adjacency_matrix_rdkit = Chem.rdmolops.GetAdjacencyMatrix(Chem.AddHs(mol))
+        adjacency_matrix_torch = torch.tensor(adjacency_matrix_rdkit, dtype=torch.float32)
+
+        return adjacency_matrix_torch
+        
+                   
 
 class BatchMolGraph:
     """
@@ -656,6 +690,21 @@ class BatchMolGraph:
             self.b2br = torch.tensor(b2br, dtype=torch.long)
 
         return self.b2br
+
+    def get_mols(self) -> List[Chem.Mol]:
+        """
+        Returns a list of RDKit Mol objects for all molecules in the package.
+        """
+        return [mol_graph.mol for mol_graph in self.mol_graphs]
+    
+    def get_adjacency_matrix(self) -> List[torch.Tensor]:
+        """
+        Returns a list of PyTorch tensors representing the adjacency matrices
+        for each molecule in the package.
+        """
+        return [mol_graph.get_adjacency_matrix() for mol_graph in self.mol_graphs]
+    
+
 
 def mol2graph(mols: Union[List[str], List[Chem.Mol], List[Tuple[Chem.Mol, Chem.Mol]]],
               atom_features_batch: List[np.array] = (None,),

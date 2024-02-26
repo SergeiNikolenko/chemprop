@@ -1,0 +1,44 @@
+Fold 0
+Model 0 best validation rmse = inf on epoch 0
+Model 0 test rmse = 0.295391
+Model 0 test CDD rmse = 0.295391
+Ensemble test rmse = 0.295391
+Ensemble test CDD rmse = 0.295391
+Fold 1
+Model 0 best validation rmse = inf on epoch 0
+Model 0 test rmse = 0.308463
+Model 0 test CDD rmse = 0.308463
+Ensemble test rmse = 0.308463
+Ensemble test CDD rmse = 0.308463
+Fold 2
+Model 0 best validation rmse = inf on epoch 0
+Model 0 test rmse = 0.290292
+Model 0 test CDD rmse = 0.290292
+Ensemble test rmse = 0.290292
+Ensemble test CDD rmse = 0.290292
+Fold 3
+Model 0 best validation rmse = inf on epoch 0
+Model 0 test rmse = 0.291768
+Model 0 test CDD rmse = 0.291768
+Ensemble test rmse = 0.291768
+Ensemble test CDD rmse = 0.291768
+Fold 4
+Model 0 best validation rmse = inf on epoch 0
+Model 0 test rmse = 0.296624
+Model 0 test CDD rmse = 0.296624
+Ensemble test rmse = 0.296624
+Ensemble test CDD rmse = 0.296624
+5-fold cross validation
+	Seed 0 ==> test rmse = 0.295391
+		Seed 0 ==> test CDD rmse = 0.295391
+	Seed 1 ==> test rmse = 0.308463
+		Seed 1 ==> test CDD rmse = 0.308463
+	Seed 2 ==> test rmse = 0.290292
+		Seed 2 ==> test CDD rmse = 0.290292
+	Seed 3 ==> test rmse = 0.291768
+		Seed 3 ==> test CDD rmse = 0.291768
+	Seed 4 ==> test rmse = 0.296624
+		Seed 4 ==> test CDD rmse = 0.296624
+Overall test rmse = 0.296508 +/- 0.006408
+	Overall test CDD rmse = 0.296508 +/- 0.006408
+Elapsed time = 0:00:02
