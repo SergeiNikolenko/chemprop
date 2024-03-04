@@ -1,0 +1,1614 @@
+Command line
+python start_train.py
+Args
+{'activation': 'ReLU',
+ 'adding_bond_types': True,
+ 'adding_h': True,
+ 'aggregation': 'mean',
+ 'aggregation_norm': 100,
+ 'atom_constraints': [False],
+ 'atom_descriptor_scaling': True,
+ 'atom_descriptors': None,
+ 'atom_descriptors_path': None,
+ 'atom_descriptors_size': 0,
+ 'atom_features_size': 0,
+ 'atom_messages': False,
+ 'atom_targets': ['CDD'],
+ 'batch_size': 50,
+ 'bias': False,
+ 'bias_solvent': False,
+ 'bond_constraints': [],
+ 'bond_descriptor_scaling': True,
+ 'bond_descriptors': None,
+ 'bond_descriptors_path': None,
+ 'bond_descriptors_size': 0,
+ 'bond_features_size': 0,
+ 'bond_targets': [],
+ 'cache_cutoff': 10000,
+ 'checkpoint_dir': None,
+ 'checkpoint_frzn': None,
+ 'checkpoint_path': None,
+ 'checkpoint_paths': None,
+ 'class_balance': False,
+ 'config_path': None,
+ 'constraints_path': None,
+ 'crossval_index_dir': None,
+ 'crossval_index_file': None,
+ 'crossval_index_sets': None,
+ 'cuda': True,
+ 'data_path': '../data/QM_100.csv',
+ 'data_weights_path': None,
+ 'dataset_type': 'regression',
+ 'depth': 3,
+ 'depth_solvent': 3,
+ 'device': device(type='cuda'),
+ 'dropout': 0.0,
+ 'empty_cache': False,
+ 'ensemble_size': 1,
+ 'epochs': 100,
+ 'evidential_regularization': 0,
+ 'explicit_h': False,
+ 'extra_metrics': ['mae', 'r2', 'mse'],
+ 'features_generator': None,
+ 'features_only': False,
+ 'features_path': None,
+ 'features_scaling': True,
+ 'features_size': None,
+ 'ffn_hidden_size': 300,
+ 'ffn_num_layers': 2,
+ 'final_lr': 0.0001,
+ 'folds_file': None,
+ 'freeze_first_only': False,
+ 'frzn_ffn_layers': 0,
+ 'gpu': None,
+ 'grad_clip': None,
+ 'hidden_size': 300,
+ 'hidden_size_solvent': 300,
+ 'ignore_columns': None,
+ 'ignore_nan_metrics': False,
+ 'init_lr': 0.0001,
+ 'is_atom_bond_targets': True,
+ 'keeping_atom_map': False,
+ 'log_frequency': 10,
+ 'loss_function': 'mse',
+ 'max_data_size': None,
+ 'max_lr': 0.001,
+ 'metric': 'rmse',
+ 'metrics': ['rmse', 'mae', 'r2', 'mse'],
+ 'minimize_score': True,
+ 'molecule_targets': [],
+ 'mpn_shared': False,
+ 'multiclass_num_classes': 3,
+ 'no_adding_bond_types': False,
+ 'no_atom_descriptor_scaling': False,
+ 'no_bond_descriptor_scaling': False,
+ 'no_cache_mol': False,
+ 'no_cuda': False,
+ 'no_features_scaling': False,
+ 'no_shared_atom_bond_ffn': False,
+ 'num_folds': 1,
+ 'num_lrs': 1,
+ 'num_tasks': 1,
+ 'num_workers': 16,
+ 'number_of_molecules': 1,
+ 'overwrite_default_atom_features': False,
+ 'overwrite_default_bond_features': False,
+ 'phase_features_path': None,
+ 'pytorch_seed': 0,
+ 'quiet': False,
+ 'reaction': False,
+ 'reaction_mode': 'reac_diff',
+ 'reaction_solvent': False,
+ 'resume_experiment': False,
+ 'save_dir': 'model/QM_137k_checkpoints',
+ 'save_preds': False,
+ 'save_smiles_splits': True,
+ 'seed': 0,
+ 'separate_test_atom_descriptors_path': None,
+ 'separate_test_bond_descriptors_path': None,
+ 'separate_test_constraints_path': None,
+ 'separate_test_features_path': None,
+ 'separate_test_path': None,
+ 'separate_test_phase_features_path': None,
+ 'separate_val_atom_descriptors_path': None,
+ 'separate_val_bond_descriptors_path': None,
+ 'separate_val_constraints_path': None,
+ 'separate_val_features_path': None,
+ 'separate_val_path': None,
+ 'separate_val_phase_features_path': None,
+ 'shared_atom_bond_ffn': True,
+ 'show_individual_scores': True,
+ 'smiles_columns': ['smiles'],
+ 'spectra_activation': 'exp',
+ 'spectra_phase_mask_path': None,
+ 'spectra_target_floor': 1e-08,
+ 'split_key_molecule': 0,
+ 'split_sizes': [0.8, 0.1, 0.1],
+ 'split_type': 'random',
+ 'target_columns': ['CDD'],
+ 'target_weights': None,
+ 'task_names': ['CDD'],
+ 'test': False,
+ 'test_fold_index': None,
+ 'train_data_size': None,
+ 'undirected': False,
+ 'use_input_features': False,
+ 'val_fold_index': None,
+ 'warmup_epochs': 2.0,
+ 'weights_ffn_num_layers': 2}
+Setting molecule featurization parameters to default.
+Loading data
+Number of tasks = 1
+Fold 0
+Splitting data with seed 0
+Total size = 100 | train size = 80 | val size = 10 | test size = 10
+Fitting scaler
+Building model 0
+MoleculeModel(
+  (encoder): MPN(
+    (encoder): ModuleList(
+      (0): MPNEncoder(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (act_func): ReLU()
+        (W_i): Linear(in_features=147, out_features=300, bias=False)
+        (W_h): Linear(in_features=300, out_features=300, bias=False)
+        (W_o): Linear(in_features=433, out_features=300, bias=True)
+        (W_o_b): Linear(in_features=447, out_features=300, bias=True)
+      )
+    )
+  )
+  (readout): MultiReadout(
+    (atom_ffn_base): Sequential(
+      (0): Sequential(
+        (0): Dropout(p=0.0, inplace=False)
+        (1): Linear(in_features=300, out_features=300, bias=True)
+      )
+      (1): ReLU()
+    )
+    (bond_ffn_base): Sequential(
+      (0): Sequential(
+        (0): Dropout(p=0.0, inplace=False)
+        (1): Linear(in_features=600, out_features=300, bias=True)
+      )
+      (1): ReLU()
+    )
+    (ffn_list): ModuleList(
+      (0): FFN(
+        (ffn): Sequential(
+          (0): Sequential(
+            (0): Dropout(p=0.0, inplace=False)
+            (1): Linear(in_features=300, out_features=300, bias=True)
+          )
+          (1): ReLU()
+        )
+        (ffn_readout): Sequential(
+          (0): Dropout(p=0.0, inplace=False)
+          (1): Linear(in_features=300, out_features=1, bias=True)
+        )
+      )
+    )
+  )
+)
+Number of parameters = 669,901
+Moving model to cuda
+Epoch 0
+Validation rmse = 0.261480
+Validation CDD rmse = 0.261480
+Validation mae = 0.229802
+Validation CDD mae = 0.229802
+Validation r2 = -1.410201
+Validation CDD r2 = -1.410201
+Validation mse = 0.068372
+Validation CDD mse = 0.068372
+Epoch 1
+Validation rmse = 0.156951
+Validation CDD rmse = 0.156951
+Validation mae = 0.100939
+Validation CDD mae = 0.100939
+Validation r2 = 0.131631
+Validation CDD r2 = 0.131631
+Validation mse = 0.024634
+Validation CDD mse = 0.024634
+Epoch 2
+Validation rmse = 0.163473
+Validation CDD rmse = 0.163473
+Validation mae = 0.102009
+Validation CDD mae = 0.102009
+Validation r2 = 0.057964
+Validation CDD r2 = 0.057964
+Validation mse = 0.026723
+Validation CDD mse = 0.026723
+Epoch 3
+Validation rmse = 0.149318
+Validation CDD rmse = 0.149318
+Validation mae = 0.096923
+Validation CDD mae = 0.096923
+Validation r2 = 0.214038
+Validation CDD r2 = 0.214038
+Validation mse = 0.022296
+Validation CDD mse = 0.022296
+Epoch 4
+Validation rmse = 0.159776
+Validation CDD rmse = 0.159776
+Validation mae = 0.114068
+Validation CDD mae = 0.114068
+Validation r2 = 0.100088
+Validation CDD r2 = 0.100088
+Validation mse = 0.025528
+Validation CDD mse = 0.025528
+Epoch 5
+Validation rmse = 0.142493
+Validation CDD rmse = 0.142493
+Validation mae = 0.089544
+Validation CDD mae = 0.089544
+Validation r2 = 0.284250
+Validation CDD r2 = 0.284250
+Validation mse = 0.020304
+Validation CDD mse = 0.020304
+Epoch 6
+Loss = 6.5427e-01, PNorm = 43.6732, GNorm = 1.2967, lr_0 = 7.5431e-04
+Validation rmse = 0.132302
+Validation CDD rmse = 0.132302
+Validation mae = 0.075436
+Validation CDD mae = 0.075436
+Validation r2 = 0.382967
+Validation CDD r2 = 0.382967
+Validation mse = 0.017504
+Validation CDD mse = 0.017504
+Epoch 7
+Validation rmse = 0.125902
+Validation CDD rmse = 0.125902
+Validation mae = 0.072471
+Validation CDD mae = 0.072471
+Validation r2 = 0.441222
+Validation CDD r2 = 0.441222
+Validation mse = 0.015851
+Validation CDD mse = 0.015851
+Epoch 8
+Validation rmse = 0.127994
+Validation CDD rmse = 0.127994
+Validation mae = 0.079625
+Validation CDD mae = 0.079625
+Validation r2 = 0.422493
+Validation CDD r2 = 0.422493
+Validation mse = 0.016383
+Validation CDD mse = 0.016383
+Epoch 9
+Validation rmse = 0.113013
+Validation CDD rmse = 0.113013
+Validation mae = 0.065651
+Validation CDD mae = 0.065651
+Validation r2 = 0.549768
+Validation CDD r2 = 0.549768
+Validation mse = 0.012772
+Validation CDD mse = 0.012772
+Epoch 10
+Validation rmse = 0.101489
+Validation CDD rmse = 0.101489
+Validation mae = 0.060391
+Validation CDD mae = 0.060391
+Validation r2 = 0.636909
+Validation CDD r2 = 0.636909
+Validation mse = 0.010300
+Validation CDD mse = 0.010300
+Epoch 11
+Validation rmse = 0.095655
+Validation CDD rmse = 0.095655
+Validation mae = 0.057243
+Validation CDD mae = 0.057243
+Validation r2 = 0.677454
+Validation CDD r2 = 0.677454
+Validation mse = 0.009150
+Validation CDD mse = 0.009150
+Epoch 12
+Loss = 2.9319e-01, PNorm = 43.7190, GNorm = 1.4342, lr_0 = 5.6899e-04
+Loss = 3.1919e-01, PNorm = 43.7229, GNorm = 3.2985, lr_0 = 5.5577e-04
+Validation rmse = 0.087289
+Validation CDD rmse = 0.087289
+Validation mae = 0.053422
+Validation CDD mae = 0.053422
+Validation r2 = 0.731407
+Validation CDD r2 = 0.731407
+Validation mse = 0.007619
+Validation CDD mse = 0.007619
+Epoch 13
+Validation rmse = 0.076645
+Validation CDD rmse = 0.076645
+Validation mae = 0.045789
+Validation CDD mae = 0.045789
+Validation r2 = 0.792918
+Validation CDD r2 = 0.792918
+Validation mse = 0.005874
+Validation CDD mse = 0.005874
+Epoch 14
+Validation rmse = 0.086490
+Validation CDD rmse = 0.086490
+Validation mae = 0.059239
+Validation CDD mae = 0.059239
+Validation r2 = 0.736300
+Validation CDD r2 = 0.736300
+Validation mse = 0.007481
+Validation CDD mse = 0.007481
+Epoch 15
+Validation rmse = 0.067374
+Validation CDD rmse = 0.067374
+Validation mae = 0.041202
+Validation CDD mae = 0.041202
+Validation r2 = 0.839983
+Validation CDD r2 = 0.839983
+Validation mse = 0.004539
+Validation CDD mse = 0.004539
+Epoch 16
+Validation rmse = 0.067510
+Validation CDD rmse = 0.067510
+Validation mae = 0.042015
+Validation CDD mae = 0.042015
+Validation r2 = 0.839340
+Validation CDD r2 = 0.839340
+Validation mse = 0.004558
+Validation CDD mse = 0.004558
+Epoch 17
+Validation rmse = 0.064496
+Validation CDD rmse = 0.064496
+Validation mae = 0.040229
+Validation CDD mae = 0.040229
+Validation r2 = 0.853363
+Validation CDD r2 = 0.853363
+Validation mse = 0.004160
+Validation CDD mse = 0.004160
+Epoch 18
+Loss = 1.3548e-01, PNorm = 43.7590, GNorm = 2.0367, lr_0 = 4.1923e-04
+Validation rmse = 0.060262
+Validation CDD rmse = 0.060262
+Validation mae = 0.036840
+Validation CDD mae = 0.036840
+Validation r2 = 0.871982
+Validation CDD r2 = 0.871982
+Validation mse = 0.003632
+Validation CDD mse = 0.003632
+Epoch 19
+Validation rmse = 0.061918
+Validation CDD rmse = 0.061918
+Validation mae = 0.039292
+Validation CDD mae = 0.039292
+Validation r2 = 0.864851
+Validation CDD r2 = 0.864851
+Validation mse = 0.003834
+Validation CDD mse = 0.003834
+Epoch 20
+Validation rmse = 0.055462
+Validation CDD rmse = 0.055462
+Validation mae = 0.034708
+Validation CDD mae = 0.034708
+Validation r2 = 0.891567
+Validation CDD r2 = 0.891567
+Validation mse = 0.003076
+Validation CDD mse = 0.003076
+Epoch 21
+Validation rmse = 0.058583
+Validation CDD rmse = 0.058583
+Validation mae = 0.038272
+Validation CDD mae = 0.038272
+Validation r2 = 0.879018
+Validation CDD r2 = 0.879018
+Validation mse = 0.003432
+Validation CDD mse = 0.003432
+Epoch 22
+Validation rmse = 0.050842
+Validation CDD rmse = 0.050842
+Validation mae = 0.031780
+Validation CDD mae = 0.031780
+Validation r2 = 0.908877
+Validation CDD r2 = 0.908877
+Validation mse = 0.002585
+Validation CDD mse = 0.002585
+Epoch 23
+Validation rmse = 0.052640
+Validation CDD rmse = 0.052640
+Validation mae = 0.033298
+Validation CDD mae = 0.033298
+Validation r2 = 0.902320
+Validation CDD r2 = 0.902320
+Validation mse = 0.002771
+Validation CDD mse = 0.002771
+Epoch 24
+Loss = 8.7696e-02, PNorm = 43.7731, GNorm = 2.5452, lr_0 = 3.1623e-04
+Validation rmse = 0.050880
+Validation CDD rmse = 0.050880
+Validation mae = 0.031803
+Validation CDD mae = 0.031803
+Validation r2 = 0.908742
+Validation CDD r2 = 0.908742
+Validation mse = 0.002589
+Validation CDD mse = 0.002589
+Epoch 25
+Validation rmse = 0.048428
+Validation CDD rmse = 0.048428
+Validation mae = 0.030068
+Validation CDD mae = 0.030068
+Validation r2 = 0.917326
+Validation CDD r2 = 0.917326
+Validation mse = 0.002345
+Validation CDD mse = 0.002345
+Epoch 26
+Validation rmse = 0.053593
+Validation CDD rmse = 0.053593
+Validation mae = 0.035857
+Validation CDD mae = 0.035857
+Validation r2 = 0.898750
+Validation CDD r2 = 0.898750
+Validation mse = 0.002872
+Validation CDD mse = 0.002872
+Epoch 27
+Validation rmse = 0.047081
+Validation CDD rmse = 0.047081
+Validation mae = 0.029480
+Validation CDD mae = 0.029480
+Validation r2 = 0.921860
+Validation CDD r2 = 0.921860
+Validation mse = 0.002217
+Validation CDD mse = 0.002217
+Epoch 28
+Validation rmse = 0.047508
+Validation CDD rmse = 0.047508
+Validation mae = 0.030168
+Validation CDD mae = 0.030168
+Validation r2 = 0.920438
+Validation CDD r2 = 0.920438
+Validation mse = 0.002257
+Validation CDD mse = 0.002257
+Epoch 29
+Validation rmse = 0.050176
+Validation CDD rmse = 0.050176
+Validation mae = 0.033108
+Validation CDD mae = 0.033108
+Validation r2 = 0.911249
+Validation CDD r2 = 0.911249
+Validation mse = 0.002518
+Validation CDD mse = 0.002518
+Epoch 30
+Validation rmse = 0.046045
+Validation CDD rmse = 0.046045
+Validation mae = 0.028848
+Validation CDD mae = 0.028848
+Validation r2 = 0.925263
+Validation CDD r2 = 0.925263
+Validation mse = 0.002120
+Validation CDD mse = 0.002120
+Epoch 31
+Loss = 6.4558e-02, PNorm = 43.7834, GNorm = 0.9726, lr_0 = 2.3300e-04
+Validation rmse = 0.048461
+Validation CDD rmse = 0.048461
+Validation mae = 0.031496
+Validation CDD mae = 0.031496
+Validation r2 = 0.917212
+Validation CDD r2 = 0.917212
+Validation mse = 0.002349
+Validation CDD mse = 0.002349
+Epoch 32
+Validation rmse = 0.049160
+Validation CDD rmse = 0.049160
+Validation mae = 0.032195
+Validation CDD mae = 0.032195
+Validation r2 = 0.914808
+Validation CDD r2 = 0.914808
+Validation mse = 0.002417
+Validation CDD mse = 0.002417
+Epoch 33
+Validation rmse = 0.045721
+Validation CDD rmse = 0.045721
+Validation mae = 0.028854
+Validation CDD mae = 0.028854
+Validation r2 = 0.926309
+Validation CDD r2 = 0.926309
+Validation mse = 0.002090
+Validation CDD mse = 0.002090
+Epoch 34
+Validation rmse = 0.046862
+Validation CDD rmse = 0.046862
+Validation mae = 0.029955
+Validation CDD mae = 0.029955
+Validation r2 = 0.922586
+Validation CDD r2 = 0.922586
+Validation mse = 0.002196
+Validation CDD mse = 0.002196
+Epoch 35
+Validation rmse = 0.047966
+Validation CDD rmse = 0.047966
+Validation mae = 0.031229
+Validation CDD mae = 0.031229
+Validation r2 = 0.918897
+Validation CDD r2 = 0.918897
+Validation mse = 0.002301
+Validation CDD mse = 0.002301
+Epoch 36
+Validation rmse = 0.045180
+Validation CDD rmse = 0.045180
+Validation mae = 0.028591
+Validation CDD mae = 0.028591
+Validation r2 = 0.928045
+Validation CDD r2 = 0.928045
+Validation mse = 0.002041
+Validation CDD mse = 0.002041
+Epoch 37
+Loss = 7.4993e-02, PNorm = 43.7898, GNorm = 0.5783, lr_0 = 1.7575e-04
+Loss = 4.6271e-02, PNorm = 43.7902, GNorm = 0.7384, lr_0 = 1.7167e-04
+Validation rmse = 0.046951
+Validation CDD rmse = 0.046951
+Validation mae = 0.030234
+Validation CDD mae = 0.030234
+Validation r2 = 0.922293
+Validation CDD r2 = 0.922293
+Validation mse = 0.002204
+Validation CDD mse = 0.002204
+Epoch 38
+Validation rmse = 0.047522
+Validation CDD rmse = 0.047522
+Validation mae = 0.030849
+Validation CDD mae = 0.030849
+Validation r2 = 0.920390
+Validation CDD r2 = 0.920390
+Validation mse = 0.002258
+Validation CDD mse = 0.002258
+Epoch 39
+Validation rmse = 0.045388
+Validation CDD rmse = 0.045388
+Validation mae = 0.028881
+Validation CDD mae = 0.028881
+Validation r2 = 0.927379
+Validation CDD r2 = 0.927379
+Validation mse = 0.002060
+Validation CDD mse = 0.002060
+Epoch 40
+Validation rmse = 0.045613
+Validation CDD rmse = 0.045613
+Validation mae = 0.029145
+Validation CDD mae = 0.029145
+Validation r2 = 0.926659
+Validation CDD r2 = 0.926659
+Validation mse = 0.002081
+Validation CDD mse = 0.002081
+Epoch 41
+Validation rmse = 0.046386
+Validation CDD rmse = 0.046386
+Validation mae = 0.029912
+Validation CDD mae = 0.029912
+Validation r2 = 0.924150
+Validation CDD r2 = 0.924150
+Validation mse = 0.002152
+Validation CDD mse = 0.002152
+Epoch 42
+Validation rmse = 0.045167
+Validation CDD rmse = 0.045167
+Validation mae = 0.028896
+Validation CDD mae = 0.028896
+Validation r2 = 0.928085
+Validation CDD r2 = 0.928085
+Validation mse = 0.002040
+Validation CDD mse = 0.002040
+Epoch 43
+Loss = 5.9924e-02, PNorm = 43.7945, GNorm = 0.8292, lr_0 = 1.2949e-04
+Validation rmse = 0.044581
+Validation CDD rmse = 0.044581
+Validation mae = 0.028430
+Validation CDD mae = 0.028430
+Validation r2 = 0.929940
+Validation CDD r2 = 0.929940
+Validation mse = 0.001987
+Validation CDD mse = 0.001987
+Epoch 44
+Validation rmse = 0.045415
+Validation CDD rmse = 0.045415
+Validation mae = 0.029142
+Validation CDD mae = 0.029142
+Validation r2 = 0.927294
+Validation CDD r2 = 0.927294
+Validation mse = 0.002062
+Validation CDD mse = 0.002062
+Epoch 45
+Validation rmse = 0.044951
+Validation CDD rmse = 0.044951
+Validation mae = 0.028730
+Validation CDD mae = 0.028730
+Validation r2 = 0.928771
+Validation CDD r2 = 0.928771
+Validation mse = 0.002021
+Validation CDD mse = 0.002021
+Epoch 46
+Validation rmse = 0.044855
+Validation CDD rmse = 0.044855
+Validation mae = 0.028647
+Validation CDD mae = 0.028647
+Validation r2 = 0.929075
+Validation CDD r2 = 0.929075
+Validation mse = 0.002012
+Validation CDD mse = 0.002012
+Epoch 47
+Validation rmse = 0.044715
+Validation CDD rmse = 0.044715
+Validation mae = 0.028545
+Validation CDD mae = 0.028545
+Validation r2 = 0.929517
+Validation CDD r2 = 0.929517
+Validation mse = 0.001999
+Validation CDD mse = 0.001999
+Epoch 48
+Validation rmse = 0.044295
+Validation CDD rmse = 0.044295
+Validation mae = 0.028232
+Validation CDD mae = 0.028232
+Validation r2 = 0.930835
+Validation CDD r2 = 0.930835
+Validation mse = 0.001962
+Validation CDD mse = 0.001962
+Epoch 49
+Loss = 5.7093e-02, PNorm = 43.7981, GNorm = 0.3322, lr_0 = 1.0000e-04
+Validation rmse = 0.044459
+Validation CDD rmse = 0.044459
+Validation mae = 0.028381
+Validation CDD mae = 0.028381
+Validation r2 = 0.930321
+Validation CDD r2 = 0.930321
+Validation mse = 0.001977
+Validation CDD mse = 0.001977
+Epoch 50
+Validation rmse = 0.044594
+Validation CDD rmse = 0.044594
+Validation mae = 0.028526
+Validation CDD mae = 0.028526
+Validation r2 = 0.929897
+Validation CDD r2 = 0.929897
+Validation mse = 0.001989
+Validation CDD mse = 0.001989
+Epoch 51
+Validation rmse = 0.044597
+Validation CDD rmse = 0.044597
+Validation mae = 0.028547
+Validation CDD mae = 0.028547
+Validation r2 = 0.929887
+Validation CDD r2 = 0.929887
+Validation mse = 0.001989
+Validation CDD mse = 0.001989
+Epoch 52
+Validation rmse = 0.044777
+Validation CDD rmse = 0.044777
+Validation mae = 0.028719
+Validation CDD mae = 0.028719
+Validation r2 = 0.929321
+Validation CDD r2 = 0.929321
+Validation mse = 0.002005
+Validation CDD mse = 0.002005
+Epoch 53
+Validation rmse = 0.044653
+Validation CDD rmse = 0.044653
+Validation mae = 0.028622
+Validation CDD mae = 0.028622
+Validation r2 = 0.929713
+Validation CDD r2 = 0.929713
+Validation mse = 0.001994
+Validation CDD mse = 0.001994
+Epoch 54
+Validation rmse = 0.044161
+Validation CDD rmse = 0.044161
+Validation mae = 0.028237
+Validation CDD mae = 0.028237
+Validation r2 = 0.931252
+Validation CDD r2 = 0.931252
+Validation mse = 0.001950
+Validation CDD mse = 0.001950
+Epoch 55
+Validation rmse = 0.044581
+Validation CDD rmse = 0.044581
+Validation mae = 0.028622
+Validation CDD mae = 0.028622
+Validation r2 = 0.929939
+Validation CDD r2 = 0.929939
+Validation mse = 0.001987
+Validation CDD mse = 0.001987
+Epoch 56
+Loss = 4.9153e-02, PNorm = 43.8017, GNorm = 0.1864, lr_0 = 1.0000e-04
+Validation rmse = 0.044280
+Validation CDD rmse = 0.044280
+Validation mae = 0.028387
+Validation CDD mae = 0.028387
+Validation r2 = 0.930881
+Validation CDD r2 = 0.930881
+Validation mse = 0.001961
+Validation CDD mse = 0.001961
+Epoch 57
+Validation rmse = 0.044102
+Validation CDD rmse = 0.044102
+Validation mae = 0.028257
+Validation CDD mae = 0.028257
+Validation r2 = 0.931436
+Validation CDD r2 = 0.931436
+Validation mse = 0.001945
+Validation CDD mse = 0.001945
+Epoch 58
+Validation rmse = 0.044313
+Validation CDD rmse = 0.044313
+Validation mae = 0.028446
+Validation CDD mae = 0.028446
+Validation r2 = 0.930780
+Validation CDD r2 = 0.930780
+Validation mse = 0.001964
+Validation CDD mse = 0.001964
+Epoch 59
+Validation rmse = 0.044587
+Validation CDD rmse = 0.044587
+Validation mae = 0.028694
+Validation CDD mae = 0.028694
+Validation r2 = 0.929921
+Validation CDD r2 = 0.929921
+Validation mse = 0.001988
+Validation CDD mse = 0.001988
+Epoch 60
+Validation rmse = 0.044336
+Validation CDD rmse = 0.044336
+Validation mae = 0.028488
+Validation CDD mae = 0.028488
+Validation r2 = 0.930707
+Validation CDD r2 = 0.930707
+Validation mse = 0.001966
+Validation CDD mse = 0.001966
+Epoch 61
+Validation rmse = 0.043585
+Validation CDD rmse = 0.043585
+Validation mae = 0.027881
+Validation CDD mae = 0.027881
+Validation r2 = 0.933034
+Validation CDD r2 = 0.933034
+Validation mse = 0.001900
+Validation CDD mse = 0.001900
+Epoch 62
+Loss = 5.3534e-02, PNorm = 43.8052, GNorm = 0.1232, lr_0 = 1.0000e-04
+Loss = 5.0208e-02, PNorm = 43.8055, GNorm = 0.7144, lr_0 = 1.0000e-04
+Validation rmse = 0.043952
+Validation CDD rmse = 0.043952
+Validation mae = 0.028176
+Validation CDD mae = 0.028176
+Validation r2 = 0.931902
+Validation CDD r2 = 0.931902
+Validation mse = 0.001932
+Validation CDD mse = 0.001932
+Epoch 63
+Validation rmse = 0.044660
+Validation CDD rmse = 0.044660
+Validation mae = 0.028793
+Validation CDD mae = 0.028793
+Validation r2 = 0.929690
+Validation CDD r2 = 0.929690
+Validation mse = 0.001995
+Validation CDD mse = 0.001995
+Epoch 64
+Validation rmse = 0.043615
+Validation CDD rmse = 0.043615
+Validation mae = 0.027902
+Validation CDD mae = 0.027902
+Validation r2 = 0.932941
+Validation CDD r2 = 0.932941
+Validation mse = 0.001902
+Validation CDD mse = 0.001902
+Epoch 65
+Validation rmse = 0.043109
+Validation CDD rmse = 0.043109
+Validation mae = 0.027494
+Validation CDD mae = 0.027494
+Validation r2 = 0.934488
+Validation CDD r2 = 0.934488
+Validation mse = 0.001858
+Validation CDD mse = 0.001858
+Epoch 66
+Validation rmse = 0.044589
+Validation CDD rmse = 0.044589
+Validation mae = 0.028832
+Validation CDD mae = 0.028832
+Validation r2 = 0.929914
+Validation CDD r2 = 0.929914
+Validation mse = 0.001988
+Validation CDD mse = 0.001988
+Epoch 67
+Validation rmse = 0.044307
+Validation CDD rmse = 0.044307
+Validation mae = 0.028608
+Validation CDD mae = 0.028608
+Validation r2 = 0.930797
+Validation CDD r2 = 0.930797
+Validation mse = 0.001963
+Validation CDD mse = 0.001963
+Epoch 68
+Loss = 4.8250e-02, PNorm = 43.8091, GNorm = 0.4625, lr_0 = 1.0000e-04
+Validation rmse = 0.042526
+Validation CDD rmse = 0.042526
+Validation mae = 0.027071
+Validation CDD mae = 0.027071
+Validation r2 = 0.936250
+Validation CDD r2 = 0.936250
+Validation mse = 0.001808
+Validation CDD mse = 0.001808
+Epoch 69
+Validation rmse = 0.043439
+Validation CDD rmse = 0.043439
+Validation mae = 0.027814
+Validation CDD mae = 0.027814
+Validation r2 = 0.933483
+Validation CDD r2 = 0.933483
+Validation mse = 0.001887
+Validation CDD mse = 0.001887
+Epoch 70
+Validation rmse = 0.044643
+Validation CDD rmse = 0.044643
+Validation mae = 0.028957
+Validation CDD mae = 0.028957
+Validation r2 = 0.929742
+Validation CDD r2 = 0.929742
+Validation mse = 0.001993
+Validation CDD mse = 0.001993
+Epoch 71
+Validation rmse = 0.042775
+Validation CDD rmse = 0.042775
+Validation mae = 0.027283
+Validation CDD mae = 0.027283
+Validation r2 = 0.935502
+Validation CDD r2 = 0.935502
+Validation mse = 0.001830
+Validation CDD mse = 0.001830
+Epoch 72
+Validation rmse = 0.042707
+Validation CDD rmse = 0.042707
+Validation mae = 0.027216
+Validation CDD mae = 0.027216
+Validation r2 = 0.935706
+Validation CDD r2 = 0.935706
+Validation mse = 0.001824
+Validation CDD mse = 0.001824
+Epoch 73
+Validation rmse = 0.044331
+Validation CDD rmse = 0.044331
+Validation mae = 0.028761
+Validation CDD mae = 0.028761
+Validation r2 = 0.930723
+Validation CDD r2 = 0.930723
+Validation mse = 0.001965
+Validation CDD mse = 0.001965
+Epoch 74
+Loss = 5.1227e-02, PNorm = 43.8127, GNorm = 0.4132, lr_0 = 1.0000e-04
+Validation rmse = 0.043368
+Validation CDD rmse = 0.043368
+Validation mae = 0.027834
+Validation CDD mae = 0.027834
+Validation r2 = 0.933699
+Validation CDD r2 = 0.933699
+Validation mse = 0.001881
+Validation CDD mse = 0.001881
+Epoch 75
+Validation rmse = 0.042527
+Validation CDD rmse = 0.042527
+Validation mae = 0.027118
+Validation CDD mae = 0.027118
+Validation r2 = 0.936246
+Validation CDD r2 = 0.936246
+Validation mse = 0.001809
+Validation CDD mse = 0.001809
+Epoch 76
+Validation rmse = 0.044223
+Validation CDD rmse = 0.044223
+Validation mae = 0.028687
+Validation CDD mae = 0.028687
+Validation r2 = 0.931061
+Validation CDD r2 = 0.931061
+Validation mse = 0.001956
+Validation CDD mse = 0.001956
+Epoch 77
+Validation rmse = 0.044729
+Validation CDD rmse = 0.044729
+Validation mae = 0.029207
+Validation CDD mae = 0.029207
+Validation r2 = 0.929474
+Validation CDD r2 = 0.929474
+Validation mse = 0.002001
+Validation CDD mse = 0.002001
+Epoch 78
+Validation rmse = 0.042288
+Validation CDD rmse = 0.042288
+Validation mae = 0.027072
+Validation CDD mae = 0.027072
+Validation r2 = 0.936960
+Validation CDD r2 = 0.936960
+Validation mse = 0.001788
+Validation CDD mse = 0.001788
+Epoch 79
+Validation rmse = 0.042822
+Validation CDD rmse = 0.042822
+Validation mae = 0.027494
+Validation CDD mae = 0.027494
+Validation r2 = 0.935359
+Validation CDD r2 = 0.935359
+Validation mse = 0.001834
+Validation CDD mse = 0.001834
+Epoch 80
+Validation rmse = 0.044852
+Validation CDD rmse = 0.044852
+Validation mae = 0.029481
+Validation CDD mae = 0.029481
+Validation r2 = 0.929086
+Validation CDD r2 = 0.929086
+Validation mse = 0.002012
+Validation CDD mse = 0.002012
+Epoch 81
+Loss = 3.8834e-02, PNorm = 43.8170, GNorm = 1.4121, lr_0 = 1.0000e-04
+Validation rmse = 0.043212
+Validation CDD rmse = 0.043212
+Validation mae = 0.027875
+Validation CDD mae = 0.027875
+Validation r2 = 0.934176
+Validation CDD r2 = 0.934176
+Validation mse = 0.001867
+Validation CDD mse = 0.001867
+Epoch 82
+Validation rmse = 0.043023
+Validation CDD rmse = 0.043023
+Validation mae = 0.027709
+Validation CDD mae = 0.027709
+Validation r2 = 0.934751
+Validation CDD r2 = 0.934751
+Validation mse = 0.001851
+Validation CDD mse = 0.001851
+Epoch 83
+Validation rmse = 0.043309
+Validation CDD rmse = 0.043309
+Validation mae = 0.027989
+Validation CDD mae = 0.027989
+Validation r2 = 0.933881
+Validation CDD r2 = 0.933881
+Validation mse = 0.001876
+Validation CDD mse = 0.001876
+Epoch 84
+Validation rmse = 0.042152
+Validation CDD rmse = 0.042152
+Validation mae = 0.027017
+Validation CDD mae = 0.027017
+Validation r2 = 0.937367
+Validation CDD r2 = 0.937367
+Validation mse = 0.001777
+Validation CDD mse = 0.001777
+Epoch 85
+Validation rmse = 0.042698
+Validation CDD rmse = 0.042698
+Validation mae = 0.027489
+Validation CDD mae = 0.027489
+Validation r2 = 0.935733
+Validation CDD r2 = 0.935733
+Validation mse = 0.001823
+Validation CDD mse = 0.001823
+Epoch 86
+Validation rmse = 0.043534
+Validation CDD rmse = 0.043534
+Validation mae = 0.028349
+Validation CDD mae = 0.028349
+Validation r2 = 0.933191
+Validation CDD r2 = 0.933191
+Validation mse = 0.001895
+Validation CDD mse = 0.001895
+Epoch 87
+Loss = 5.7052e-02, PNorm = 43.8209, GNorm = 0.4052, lr_0 = 1.0000e-04
+Loss = 2.9304e-02, PNorm = 43.8212, GNorm = 0.7468, lr_0 = 1.0000e-04
+Validation rmse = 0.042455
+Validation CDD rmse = 0.042455
+Validation mae = 0.027364
+Validation CDD mae = 0.027364
+Validation r2 = 0.936462
+Validation CDD r2 = 0.936462
+Validation mse = 0.001802
+Validation CDD mse = 0.001802
+Epoch 88
+Validation rmse = 0.041807
+Validation CDD rmse = 0.041807
+Validation mae = 0.026813
+Validation CDD mae = 0.026813
+Validation r2 = 0.938387
+Validation CDD r2 = 0.938387
+Validation mse = 0.001748
+Validation CDD mse = 0.001748
+Epoch 89
+Validation rmse = 0.043494
+Validation CDD rmse = 0.043494
+Validation mae = 0.028382
+Validation CDD mae = 0.028382
+Validation r2 = 0.933315
+Validation CDD r2 = 0.933315
+Validation mse = 0.001892
+Validation CDD mse = 0.001892
+Epoch 90
+Validation rmse = 0.043368
+Validation CDD rmse = 0.043368
+Validation mae = 0.028292
+Validation CDD mae = 0.028292
+Validation r2 = 0.933699
+Validation CDD r2 = 0.933699
+Validation mse = 0.001881
+Validation CDD mse = 0.001881
+Epoch 91
+Validation rmse = 0.041279
+Validation CDD rmse = 0.041279
+Validation mae = 0.026339
+Validation CDD mae = 0.026339
+Validation r2 = 0.939934
+Validation CDD r2 = 0.939934
+Validation mse = 0.001704
+Validation CDD mse = 0.001704
+Epoch 92
+Validation rmse = 0.042918
+Validation CDD rmse = 0.042918
+Validation mae = 0.027856
+Validation CDD mae = 0.027856
+Validation r2 = 0.935068
+Validation CDD r2 = 0.935068
+Validation mse = 0.001842
+Validation CDD mse = 0.001842
+Epoch 93
+Loss = 4.3889e-02, PNorm = 43.8252, GNorm = 1.2666, lr_0 = 1.0000e-04
+Validation rmse = 0.043301
+Validation CDD rmse = 0.043301
+Validation mae = 0.028256
+Validation CDD mae = 0.028256
+Validation r2 = 0.933904
+Validation CDD r2 = 0.933904
+Validation mse = 0.001875
+Validation CDD mse = 0.001875
+Epoch 94
+Validation rmse = 0.041386
+Validation CDD rmse = 0.041386
+Validation mae = 0.026508
+Validation CDD mae = 0.026508
+Validation r2 = 0.939621
+Validation CDD r2 = 0.939621
+Validation mse = 0.001713
+Validation CDD mse = 0.001713
+Epoch 95
+Validation rmse = 0.043086
+Validation CDD rmse = 0.043086
+Validation mae = 0.028057
+Validation CDD mae = 0.028057
+Validation r2 = 0.934558
+Validation CDD r2 = 0.934558
+Validation mse = 0.001856
+Validation CDD mse = 0.001856
+Epoch 96
+Validation rmse = 0.042625
+Validation CDD rmse = 0.042625
+Validation mae = 0.027641
+Validation CDD mae = 0.027641
+Validation r2 = 0.935952
+Validation CDD r2 = 0.935952
+Validation mse = 0.001817
+Validation CDD mse = 0.001817
+Epoch 97
+Validation rmse = 0.041087
+Validation CDD rmse = 0.041087
+Validation mae = 0.026268
+Validation CDD mae = 0.026268
+Validation r2 = 0.940489
+Validation CDD r2 = 0.940489
+Validation mse = 0.001688
+Validation CDD mse = 0.001688
+Epoch 98
+Validation rmse = 0.042480
+Validation CDD rmse = 0.042480
+Validation mae = 0.027554
+Validation CDD mae = 0.027554
+Validation r2 = 0.936388
+Validation CDD r2 = 0.936388
+Validation mse = 0.001805
+Validation CDD mse = 0.001805
+Epoch 99
+Loss = 4.2242e-02, PNorm = 43.8293, GNorm = 0.3567, lr_0 = 1.0000e-04
+Validation rmse = 0.042820
+Validation CDD rmse = 0.042820
+Validation mae = 0.027940
+Validation CDD mae = 0.027940
+Validation r2 = 0.935364
+Validation CDD r2 = 0.935364
+Validation mse = 0.001834
+Validation CDD mse = 0.001834
+Model 0 best validation rmse = 0.041087 on epoch 97
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "encoder.encoder.0.W_o_b.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o_b.bias".
+Loading pretrained parameter "readout.atom_ffn_base.0.1.weight".
+Loading pretrained parameter "readout.atom_ffn_base.0.1.bias".
+Loading pretrained parameter "readout.bond_ffn_base.0.1.weight".
+Loading pretrained parameter "readout.bond_ffn_base.0.1.bias".
+Loading pretrained parameter "readout.ffn_list.0.ffn.0.1.weight".
+Loading pretrained parameter "readout.ffn_list.0.ffn.0.1.bias".
+Loading pretrained parameter "readout.ffn_list.0.ffn_readout.1.weight".
+Loading pretrained parameter "readout.ffn_list.0.ffn_readout.1.bias".
+Moving model to cuda
+Model 0 test rmse = 0.045882
+Model 0 test CDD rmse = 0.045882
+Model 0 test mae = 0.027145
+Model 0 test CDD mae = 0.027145
+Model 0 test r2 = 0.939281
+Model 0 test CDD r2 = 0.939281
+Model 0 test mse = 0.002105
+Model 0 test CDD mse = 0.002105
+Ensemble test rmse = 0.045882
+Ensemble test CDD rmse = 0.045882
+Ensemble test mae = 0.027145
+Ensemble test CDD mae = 0.027145
+Ensemble test r2 = 0.939281
+Ensemble test CDD r2 = 0.939281
+Ensemble test mse = 0.002105
+Ensemble test CDD mse = 0.002105
+1-fold cross validation
+	Seed 0 ==> test rmse = 0.045882
+		Seed 0 ==> test CDD rmse = 0.045882
+	Seed 0 ==> test mae = 0.027145
+		Seed 0 ==> test CDD mae = 0.027145
+	Seed 0 ==> test r2 = 0.939281
+		Seed 0 ==> test CDD r2 = 0.939281
+	Seed 0 ==> test mse = 0.002105
+		Seed 0 ==> test CDD mse = 0.002105
+Overall test rmse = 0.045882 +/- 0.000000
+	Overall test CDD rmse = 0.045882 +/- 0.000000
+Overall test mae = 0.027145 +/- 0.000000
+	Overall test CDD mae = 0.027145 +/- 0.000000
+Overall test r2 = 0.939281 +/- 0.000000
+	Overall test CDD r2 = 0.939281 +/- 0.000000
+Overall test mse = 0.002105 +/- 0.000000
+	Overall test CDD mse = 0.002105 +/- 0.000000
+Elapsed time = 0:00:51
+Command line
+python start_train.py
+Args
+{'activation': 'ReLU',
+ 'adding_bond_types': True,
+ 'adding_h': True,
+ 'aggregation': 'mean',
+ 'aggregation_norm': 100,
+ 'atom_constraints': [False],
+ 'atom_descriptor_scaling': True,
+ 'atom_descriptors': None,
+ 'atom_descriptors_path': None,
+ 'atom_descriptors_size': 0,
+ 'atom_features_size': 0,
+ 'atom_messages': False,
+ 'atom_targets': ['CDD'],
+ 'batch_size': 50,
+ 'bias': False,
+ 'bias_solvent': False,
+ 'bond_constraints': [],
+ 'bond_descriptor_scaling': True,
+ 'bond_descriptors': None,
+ 'bond_descriptors_path': None,
+ 'bond_descriptors_size': 0,
+ 'bond_features_size': 0,
+ 'bond_targets': [],
+ 'cache_cutoff': 10000,
+ 'checkpoint_dir': None,
+ 'checkpoint_frzn': None,
+ 'checkpoint_path': None,
+ 'checkpoint_paths': None,
+ 'class_balance': False,
+ 'config_path': None,
+ 'constraints_path': None,
+ 'crossval_index_dir': None,
+ 'crossval_index_file': None,
+ 'crossval_index_sets': None,
+ 'cuda': True,
+ 'data_path': '../data/QM_100.csv',
+ 'data_weights_path': None,
+ 'dataset_type': 'regression',
+ 'depth': 3,
+ 'depth_solvent': 3,
+ 'device': device(type='cuda'),
+ 'dropout': 0.0,
+ 'empty_cache': False,
+ 'ensemble_size': 1,
+ 'epochs': 100,
+ 'evidential_regularization': 0,
+ 'explicit_h': False,
+ 'extra_metrics': ['mae', 'r2', 'mse'],
+ 'features_generator': None,
+ 'features_only': False,
+ 'features_path': None,
+ 'features_scaling': True,
+ 'features_size': None,
+ 'ffn_hidden_size': 300,
+ 'ffn_num_layers': 2,
+ 'final_lr': 0.0001,
+ 'folds_file': None,
+ 'freeze_first_only': False,
+ 'frzn_ffn_layers': 0,
+ 'gpu': None,
+ 'grad_clip': None,
+ 'hidden_size': 300,
+ 'hidden_size_solvent': 300,
+ 'ignore_columns': None,
+ 'ignore_nan_metrics': False,
+ 'init_lr': 0.0001,
+ 'is_atom_bond_targets': True,
+ 'keeping_atom_map': False,
+ 'log_frequency': 10,
+ 'loss_function': 'mse',
+ 'max_data_size': None,
+ 'max_lr': 0.001,
+ 'metric': 'rmse',
+ 'metrics': ['rmse', 'mae', 'r2', 'mse'],
+ 'minimize_score': True,
+ 'molecule_targets': [],
+ 'mpn_shared': False,
+ 'multiclass_num_classes': 3,
+ 'no_adding_bond_types': False,
+ 'no_atom_descriptor_scaling': False,
+ 'no_bond_descriptor_scaling': False,
+ 'no_cache_mol': False,
+ 'no_cuda': False,
+ 'no_features_scaling': False,
+ 'no_shared_atom_bond_ffn': False,
+ 'num_folds': 1,
+ 'num_lrs': 1,
+ 'num_tasks': 1,
+ 'num_workers': 16,
+ 'number_of_molecules': 1,
+ 'overwrite_default_atom_features': False,
+ 'overwrite_default_bond_features': False,
+ 'phase_features_path': None,
+ 'pytorch_seed': 0,
+ 'quiet': False,
+ 'reaction': False,
+ 'reaction_mode': 'reac_diff',
+ 'reaction_solvent': False,
+ 'resume_experiment': False,
+ 'save_dir': 'model/QM_137k_checkpoints',
+ 'save_preds': False,
+ 'save_smiles_splits': True,
+ 'seed': 0,
+ 'separate_test_atom_descriptors_path': None,
+ 'separate_test_bond_descriptors_path': None,
+ 'separate_test_constraints_path': None,
+ 'separate_test_features_path': None,
+ 'separate_test_path': None,
+ 'separate_test_phase_features_path': None,
+ 'separate_val_atom_descriptors_path': None,
+ 'separate_val_bond_descriptors_path': None,
+ 'separate_val_constraints_path': None,
+ 'separate_val_features_path': None,
+ 'separate_val_path': None,
+ 'separate_val_phase_features_path': None,
+ 'shared_atom_bond_ffn': True,
+ 'show_individual_scores': True,
+ 'smiles_columns': ['smiles'],
+ 'spectra_activation': 'exp',
+ 'spectra_phase_mask_path': None,
+ 'spectra_target_floor': 1e-08,
+ 'split_key_molecule': 0,
+ 'split_sizes': [0.8, 0.1, 0.1],
+ 'split_type': 'random',
+ 'target_columns': ['CDD'],
+ 'target_weights': None,
+ 'task_names': ['CDD'],
+ 'test': False,
+ 'test_fold_index': None,
+ 'train_data_size': None,
+ 'undirected': False,
+ 'use_input_features': False,
+ 'val_fold_index': None,
+ 'warmup_epochs': 2.0,
+ 'weights_ffn_num_layers': 2}
+Setting molecule featurization parameters to default.
+Loading data
+Number of tasks = 1
+Fold 0
+Splitting data with seed 0
+Total size = 100 | train size = 80 | val size = 10 | test size = 10
+Fitting scaler
+Building model 0
+MoleculeModel(
+  (encoder): MPN(
+    (encoder): ModuleList(
+      (0): MPNEncoder(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (act_func): ReLU()
+        (W_i): Linear(in_features=147, out_features=300, bias=False)
+        (W_h): Linear(in_features=300, out_features=300, bias=False)
+        (W_o): Linear(in_features=433, out_features=300, bias=True)
+        (W_o_b): Linear(in_features=447, out_features=300, bias=True)
+      )
+    )
+  )
+  (readout): MultiReadout(
+    (atom_ffn_base): Sequential(
+      (0): Sequential(
+        (0): Dropout(p=0.0, inplace=False)
+        (1): Linear(in_features=300, out_features=300, bias=True)
+      )
+      (1): ReLU()
+    )
+    (bond_ffn_base): Sequential(
+      (0): Sequential(
+        (0): Dropout(p=0.0, inplace=False)
+        (1): Linear(in_features=600, out_features=300, bias=True)
+      )
+      (1): ReLU()
+    )
+    (ffn_list): ModuleList(
+      (0): FFN(
+        (ffn): Sequential(
+          (0): Sequential(
+            (0): Dropout(p=0.0, inplace=False)
+            (1): Linear(in_features=300, out_features=300, bias=True)
+          )
+          (1): ReLU()
+        )
+        (ffn_readout): Sequential(
+          (0): Dropout(p=0.0, inplace=False)
+          (1): Linear(in_features=300, out_features=1, bias=True)
+        )
+      )
+    )
+  )
+)
+Number of parameters = 669,901
+Moving model to cuda
+Epoch 0
+Validation rmse = 0.261480
+Validation CDD rmse = 0.261480
+Validation mae = 0.229802
+Validation CDD mae = 0.229802
+Validation r2 = -1.410201
+Validation CDD r2 = -1.410201
+Validation mse = 0.068372
+Validation CDD mse = 0.068372
+Epoch 1
+Validation rmse = 0.156951
+Validation CDD rmse = 0.156951
+Validation mae = 0.100939
+Validation CDD mae = 0.100939
+Validation r2 = 0.131631
+Validation CDD r2 = 0.131631
+Validation mse = 0.024634
+Validation CDD mse = 0.024634
+Epoch 2
+Validation rmse = 0.163473
+Validation CDD rmse = 0.163473
+Validation mae = 0.102009
+Validation CDD mae = 0.102009
+Validation r2 = 0.057964
+Validation CDD r2 = 0.057964
+Validation mse = 0.026723
+Validation CDD mse = 0.026723
+Epoch 3
+Validation rmse = 0.149318
+Validation CDD rmse = 0.149318
+Validation mae = 0.096923
+Validation CDD mae = 0.096923
+Validation r2 = 0.214038
+Validation CDD r2 = 0.214038
+Validation mse = 0.022296
+Validation CDD mse = 0.022296
+Epoch 4
+Validation rmse = 0.159776
+Validation CDD rmse = 0.159776
+Validation mae = 0.114068
+Validation CDD mae = 0.114068
+Validation r2 = 0.100088
+Validation CDD r2 = 0.100088
+Validation mse = 0.025528
+Validation CDD mse = 0.025528
+Epoch 5
+Validation rmse = 0.142493
+Validation CDD rmse = 0.142493
+Validation mae = 0.089544
+Validation CDD mae = 0.089544
+Validation r2 = 0.284250
+Validation CDD r2 = 0.284250
+Validation mse = 0.020304
+Validation CDD mse = 0.020304
+Epoch 6
+Loss = 6.5427e-01, PNorm = 43.6732, GNorm = 1.2967, lr_0 = 7.5431e-04
+Validation rmse = 0.132302
+Validation CDD rmse = 0.132302
+Validation mae = 0.075436
+Validation CDD mae = 0.075436
+Validation r2 = 0.382967
+Validation CDD r2 = 0.382967
+Validation mse = 0.017504
+Validation CDD mse = 0.017504
+Epoch 7
+Validation rmse = 0.125902
+Validation CDD rmse = 0.125902
+Validation mae = 0.072471
+Validation CDD mae = 0.072471
+Validation r2 = 0.441222
+Validation CDD r2 = 0.441222
+Validation mse = 0.015851
+Validation CDD mse = 0.015851
+Epoch 8
+Validation rmse = 0.127994
+Validation CDD rmse = 0.127994
+Validation mae = 0.079625
+Validation CDD mae = 0.079625
+Validation r2 = 0.422493
+Validation CDD r2 = 0.422493
+Validation mse = 0.016383
+Validation CDD mse = 0.016383
+Epoch 9
+Validation rmse = 0.113013
+Validation CDD rmse = 0.113013
+Validation mae = 0.065651
+Validation CDD mae = 0.065651
+Validation r2 = 0.549768
+Validation CDD r2 = 0.549768
+Validation mse = 0.012772
+Validation CDD mse = 0.012772
+Epoch 10
+Validation rmse = 0.101489
+Validation CDD rmse = 0.101489
+Validation mae = 0.060391
+Validation CDD mae = 0.060391
+Validation r2 = 0.636909
+Validation CDD r2 = 0.636909
+Validation mse = 0.010300
+Validation CDD mse = 0.010300
+Epoch 11
+Validation rmse = 0.095655
+Validation CDD rmse = 0.095655
+Validation mae = 0.057243
+Validation CDD mae = 0.057243
+Validation r2 = 0.677454
+Validation CDD r2 = 0.677454
+Validation mse = 0.009150
+Validation CDD mse = 0.009150
+Epoch 12
+Loss = 2.9319e-01, PNorm = 43.7190, GNorm = 1.4342, lr_0 = 5.6899e-04
+Loss = 3.1919e-01, PNorm = 43.7229, GNorm = 3.2985, lr_0 = 5.5577e-04
+Validation rmse = 0.087289
+Validation CDD rmse = 0.087289
+Validation mae = 0.053422
+Validation CDD mae = 0.053422
+Validation r2 = 0.731407
+Validation CDD r2 = 0.731407
+Validation mse = 0.007619
+Validation CDD mse = 0.007619
+Epoch 13
+Validation rmse = 0.076645
+Validation CDD rmse = 0.076645
+Validation mae = 0.045789
+Validation CDD mae = 0.045789
+Validation r2 = 0.792918
+Validation CDD r2 = 0.792918
+Validation mse = 0.005874
+Validation CDD mse = 0.005874
+Epoch 14
+Validation rmse = 0.086490
+Validation CDD rmse = 0.086490
+Validation mae = 0.059239
+Validation CDD mae = 0.059239
+Validation r2 = 0.736300
+Validation CDD r2 = 0.736300
+Validation mse = 0.007481
+Validation CDD mse = 0.007481
+Epoch 15
+Validation rmse = 0.067374
+Validation CDD rmse = 0.067374
+Validation mae = 0.041202
+Validation CDD mae = 0.041202
+Validation r2 = 0.839983
+Validation CDD r2 = 0.839983
+Validation mse = 0.004539
+Validation CDD mse = 0.004539
+Epoch 16
+Validation rmse = 0.067510
+Validation CDD rmse = 0.067510
+Validation mae = 0.042015
+Validation CDD mae = 0.042015
+Validation r2 = 0.839340
+Validation CDD r2 = 0.839340
+Validation mse = 0.004558
+Validation CDD mse = 0.004558
+Epoch 17
+Validation rmse = 0.064496
+Validation CDD rmse = 0.064496
+Validation mae = 0.040229
+Validation CDD mae = 0.040229
+Validation r2 = 0.853363
+Validation CDD r2 = 0.853363
+Validation mse = 0.004160
+Validation CDD mse = 0.004160
+Epoch 18
+Loss = 1.3548e-01, PNorm = 43.7590, GNorm = 2.0367, lr_0 = 4.1923e-04
+Validation rmse = 0.060262
+Validation CDD rmse = 0.060262
+Validation mae = 0.036840
+Validation CDD mae = 0.036840
+Validation r2 = 0.871982
+Validation CDD r2 = 0.871982
+Validation mse = 0.003632
+Validation CDD mse = 0.003632
+Epoch 19
+Validation rmse = 0.061918
+Validation CDD rmse = 0.061918
+Validation mae = 0.039292
+Validation CDD mae = 0.039292
+Validation r2 = 0.864851
+Validation CDD r2 = 0.864851
+Validation mse = 0.003834
+Validation CDD mse = 0.003834
+Epoch 20
+Validation rmse = 0.055462
+Validation CDD rmse = 0.055462
+Validation mae = 0.034708
+Validation CDD mae = 0.034708
+Validation r2 = 0.891567
+Validation CDD r2 = 0.891567
+Validation mse = 0.003076
+Validation CDD mse = 0.003076
+Epoch 21
+Validation rmse = 0.058583
+Validation CDD rmse = 0.058583
+Validation mae = 0.038272
+Validation CDD mae = 0.038272
+Validation r2 = 0.879018
+Validation CDD r2 = 0.879018
+Validation mse = 0.003432
+Validation CDD mse = 0.003432
+Epoch 22
+Validation rmse = 0.050842
+Validation CDD rmse = 0.050842
+Validation mae = 0.031780
+Validation CDD mae = 0.031780
+Validation r2 = 0.908877
+Validation CDD r2 = 0.908877
+Validation mse = 0.002585
+Validation CDD mse = 0.002585
+Epoch 23
+Validation rmse = 0.052640
+Validation CDD rmse = 0.052640
+Validation mae = 0.033298
+Validation CDD mae = 0.033298
+Validation r2 = 0.902320
+Validation CDD r2 = 0.902320
+Validation mse = 0.002771
+Validation CDD mse = 0.002771
+Epoch 24
+Loss = 8.7696e-02, PNorm = 43.7731, GNorm = 2.5452, lr_0 = 3.1623e-04
+Validation rmse = 0.050880
+Validation CDD rmse = 0.050880
+Validation mae = 0.031803
+Validation CDD mae = 0.031803
+Validation r2 = 0.908742
+Validation CDD r2 = 0.908742
+Validation mse = 0.002589
+Validation CDD mse = 0.002589
+Epoch 25
+Validation rmse = 0.048428
+Validation CDD rmse = 0.048428
+Validation mae = 0.030068
+Validation CDD mae = 0.030068
+Validation r2 = 0.917326
+Validation CDD r2 = 0.917326
+Validation mse = 0.002345
+Validation CDD mse = 0.002345
+Epoch 26
+Validation rmse = 0.053593
+Validation CDD rmse = 0.053593
+Validation mae = 0.035857
+Validation CDD mae = 0.035857
+Validation r2 = 0.898750
+Validation CDD r2 = 0.898750
+Validation mse = 0.002872
+Validation CDD mse = 0.002872
+Epoch 27
+Validation rmse = 0.047081
+Validation CDD rmse = 0.047081
+Validation mae = 0.029480
+Validation CDD mae = 0.029480
+Validation r2 = 0.921860
+Validation CDD r2 = 0.921860
+Validation mse = 0.002217
+Validation CDD mse = 0.002217

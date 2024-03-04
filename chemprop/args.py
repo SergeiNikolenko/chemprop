@@ -92,7 +92,7 @@ class CommonArgs(Tap):
     """Turn off scaling of features."""
     max_data_size: int = None
     """Maximum number of data points to load."""
-    num_workers: int = 8
+    num_workers: int = 16
     """Number of workers for the parallel data loading (0 means sequential)."""
     batch_size: int = 50
     """Batch size."""

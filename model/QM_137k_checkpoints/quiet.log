@@ -1,0 +1,37 @@
+Fold 0
+Model 0 best validation rmse = 0.041087 on epoch 97
+Model 0 test rmse = 0.045882
+Model 0 test CDD rmse = 0.045882
+Model 0 test mae = 0.027145
+Model 0 test CDD mae = 0.027145
+Model 0 test r2 = 0.939281
+Model 0 test CDD r2 = 0.939281
+Model 0 test mse = 0.002105
+Model 0 test CDD mse = 0.002105
+Ensemble test rmse = 0.045882
+Ensemble test CDD rmse = 0.045882
+Ensemble test mae = 0.027145
+Ensemble test CDD mae = 0.027145
+Ensemble test r2 = 0.939281
+Ensemble test CDD r2 = 0.939281
+Ensemble test mse = 0.002105
+Ensemble test CDD mse = 0.002105
+1-fold cross validation
+	Seed 0 ==> test rmse = 0.045882
+		Seed 0 ==> test CDD rmse = 0.045882
+	Seed 0 ==> test mae = 0.027145
+		Seed 0 ==> test CDD mae = 0.027145
+	Seed 0 ==> test r2 = 0.939281
+		Seed 0 ==> test CDD r2 = 0.939281
+	Seed 0 ==> test mse = 0.002105
+		Seed 0 ==> test CDD mse = 0.002105
+Overall test rmse = 0.045882 +/- 0.000000
+	Overall test CDD rmse = 0.045882 +/- 0.000000
+Overall test mae = 0.027145 +/- 0.000000
+	Overall test CDD mae = 0.027145 +/- 0.000000
+Overall test r2 = 0.939281 +/- 0.000000
+	Overall test CDD r2 = 0.939281 +/- 0.000000
+Overall test mse = 0.002105 +/- 0.000000
+	Overall test CDD mse = 0.002105 +/- 0.000000
+Elapsed time = 0:00:51
+Fold 0

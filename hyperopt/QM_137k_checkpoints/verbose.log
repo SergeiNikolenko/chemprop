@@ -1,0 +1,20 @@
+Creating search space using parameters ['depth', 'ffn_num_layers', 'dropout', 'linked_hidden_size'].
+No manual trials loaded as part of hyperparameter search
+Initiating trial with seed 0
+Loaded 0 previous trials
+Parameters assigned with random search, 50 random trials remaining
+Creating search space using parameters ['dropout', 'linked_hidden_size', 'depth', 'ffn_num_layers'].
+No manual trials loaded as part of hyperparameter search
+Initiating trial with seed 1
+Loaded 0 previous trials
+Parameters assigned with random search, 50 random trials remaining
+Creating search space using parameters ['dropout', 'ffn_num_layers', 'depth', 'linked_hidden_size'].
+No manual trials loaded as part of hyperparameter search
+Initiating trial with seed 2
+Loaded 0 previous trials
+Parameters assigned with random search, 50 random trials remaining
+Creating search space using parameters ['depth', 'dropout', 'linked_hidden_size', 'ffn_num_layers'].
+No manual trials loaded as part of hyperparameter search
+Initiating trial with seed 3
+Loaded 0 previous trials
+Parameters assigned with random search, 50 random trials remaining

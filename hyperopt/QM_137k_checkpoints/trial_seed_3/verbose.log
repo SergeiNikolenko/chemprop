@@ -1,0 +1,255 @@
+Command line
+python hyper.py
+Args
+{'activation': 'ReLU',
+ 'adding_bond_types': True,
+ 'adding_h': True,
+ 'aggregation': 'mean',
+ 'aggregation_norm': 100,
+ 'atom_constraints': [False],
+ 'atom_descriptor_scaling': True,
+ 'atom_descriptors': None,
+ 'atom_descriptors_path': None,
+ 'atom_descriptors_size': 0,
+ 'atom_features_size': 0,
+ 'atom_messages': False,
+ 'atom_targets': ['CDD'],
+ 'batch_size': 50,
+ 'bias': False,
+ 'bias_solvent': False,
+ 'bond_constraints': [],
+ 'bond_descriptor_scaling': True,
+ 'bond_descriptors': None,
+ 'bond_descriptors_path': None,
+ 'bond_descriptors_size': 0,
+ 'bond_features_size': 0,
+ 'bond_targets': [],
+ 'cache_cutoff': 10000,
+ 'checkpoint_dir': None,
+ 'checkpoint_frzn': None,
+ 'checkpoint_path': None,
+ 'checkpoint_paths': None,
+ 'class_balance': False,
+ 'config_path': None,
+ 'config_save_path': 'hyperopt/best_hyperparams.json',
+ 'constraints_path': None,
+ 'crossval_index_dir': None,
+ 'crossval_index_file': None,
+ 'crossval_index_sets': None,
+ 'cuda': True,
+ 'data_path': '../data/QM_137k.csv',
+ 'data_weights_path': None,
+ 'dataset_type': 'regression',
+ 'depth': 5,
+ 'depth_solvent': 3,
+ 'device': device(type='cuda'),
+ 'dropout': 0.05,
+ 'empty_cache': False,
+ 'ensemble_size': 1,
+ 'epochs': 100,
+ 'evidential_regularization': 0,
+ 'explicit_h': False,
+ 'extra_metrics': ['mae', 'r2', 'mse'],
+ 'features_generator': None,
+ 'features_only': False,
+ 'features_path': None,
+ 'features_scaling': True,
+ 'features_size': None,
+ 'ffn_hidden_size': 2200,
+ 'ffn_num_layers': 2,
+ 'final_lr': 0.0001,
+ 'folds_file': None,
+ 'freeze_first_only': False,
+ 'frzn_ffn_layers': 0,
+ 'gpu': None,
+ 'grad_clip': None,
+ 'hidden_size': 2200,
+ 'hidden_size_solvent': 300,
+ 'hyperopt_checkpoint_dir': 'hyperopt/QM_137k_checkpoints',
+ 'hyperopt_seed': 0,
+ 'ignore_columns': None,
+ 'ignore_nan_metrics': False,
+ 'init_lr': 0.0001,
+ 'is_atom_bond_targets': True,
+ 'keeping_atom_map': False,
+ 'linked_hidden_size': 2200,
+ 'log_dir': 'hyperopt/QM_137k_checkpoints',
+ 'log_frequency': 10,
+ 'loss_function': 'mse',
+ 'manual_trial_dirs': None,
+ 'max_data_size': None,
+ 'max_lr': 0.001,
+ 'metric': 'rmse',
+ 'metrics': ['rmse', 'mae', 'r2', 'mse'],
+ 'minimize_score': True,
+ 'molecule_targets': [],
+ 'mpn_shared': False,
+ 'multiclass_num_classes': 3,
+ 'no_adding_bond_types': False,
+ 'no_atom_descriptor_scaling': False,
+ 'no_bond_descriptor_scaling': False,
+ 'no_cache_mol': False,
+ 'no_cuda': False,
+ 'no_features_scaling': False,
+ 'no_shared_atom_bond_ffn': False,
+ 'num_folds': 1,
+ 'num_iters': 100,
+ 'num_lrs': 1,
+ 'num_tasks': 1,
+ 'num_workers': 16,
+ 'number_of_molecules': 1,
+ 'overwrite_default_atom_features': False,
+ 'overwrite_default_bond_features': False,
+ 'phase_features_path': None,
+ 'pytorch_seed': 0,
+ 'quiet': False,
+ 'reaction': False,
+ 'reaction_mode': 'reac_diff',
+ 'reaction_solvent': False,
+ 'resume_experiment': False,
+ 'save_dir': 'hyperopt/QM_137k_checkpoints/trial_seed_3',
+ 'save_preds': False,
+ 'save_smiles_splits': False,
+ 'search_parameter_keywords': ['basic'],
+ 'search_parameters': ['depth',
+                       'dropout',
+                       'linked_hidden_size',
+                       'ffn_num_layers'],
+ 'seed': 0,
+ 'separate_test_atom_descriptors_path': None,
+ 'separate_test_bond_descriptors_path': None,
+ 'separate_test_constraints_path': None,
+ 'separate_test_features_path': None,
+ 'separate_test_path': None,
+ 'separate_test_phase_features_path': None,
+ 'separate_val_atom_descriptors_path': None,
+ 'separate_val_bond_descriptors_path': None,
+ 'separate_val_constraints_path': None,
+ 'separate_val_features_path': None,
+ 'separate_val_path': None,
+ 'separate_val_phase_features_path': None,
+ 'shared_atom_bond_ffn': True,
+ 'show_individual_scores': True,
+ 'smiles_columns': ['smiles'],
+ 'spectra_activation': 'exp',
+ 'spectra_phase_mask_path': None,
+ 'spectra_target_floor': 1e-08,
+ 'split_key_molecule': 0,
+ 'split_sizes': [0.8, 0.1, 0.1],
+ 'split_type': 'random',
+ 'startup_random_iters': 50,
+ 'target_columns': ['CDD'],
+ 'target_weights': None,
+ 'task_names': ['CDD'],
+ 'test': False,
+ 'test_fold_index': None,
+ 'train_data_size': None,
+ 'undirected': False,
+ 'use_input_features': False,
+ 'val_fold_index': None,
+ 'warmup_epochs': 2.0,
+ 'weights_ffn_num_layers': 2}
+Setting molecule featurization parameters to default.
+Loading data
+Number of tasks = 1
+Fold 0
+Splitting data with seed 0
+Total size = 136,219 | train size = 108,975 | val size = 13,622 | test size = 13,622
+Fitting scaler
+Building model 0
+MoleculeModel(
+  (encoder): MPN(
+    (encoder): ModuleList(
+      (0): MPNEncoder(
+        (dropout): Dropout(p=0.05, inplace=False)
+        (act_func): ReLU()
+        (W_i): Linear(in_features=147, out_features=2200, bias=False)
+        (W_h): Linear(in_features=2200, out_features=2200, bias=False)
+        (W_o): Linear(in_features=2333, out_features=2200, bias=True)
+        (W_o_b): Linear(in_features=2347, out_features=2200, bias=True)
+      )
+    )
+  )
+  (readout): MultiReadout(
+    (atom_ffn_base): Sequential(
+      (0): Sequential(
+        (0): Dropout(p=0.05, inplace=False)
+        (1): Linear(in_features=2200, out_features=2200, bias=True)
+      )
+      (1): ReLU()
+    )
+    (bond_ffn_base): Sequential(
+      (0): Sequential(
+        (0): Dropout(p=0.05, inplace=False)
+        (1): Linear(in_features=4400, out_features=2200, bias=True)
+      )
+      (1): ReLU()
+    )
+    (ffn_list): ModuleList(
+      (0): FFN(
+        (ffn): Sequential(
+          (0): Sequential(
+            (0): Dropout(p=0.05, inplace=False)
+            (1): Linear(in_features=2200, out_features=2200, bias=True)
+          )
+          (1): ReLU()
+        )
+        (ffn_readout): Sequential(
+          (0): Dropout(p=0.05, inplace=False)
+          (1): Linear(in_features=2200, out_features=1, bias=True)
+        )
+      )
+    )
+  )
+)
+Number of parameters = 29,992,601
+Moving model to cuda
+Epoch 0
+Loss = 1.6651e+00, PNorm = 110.2128, GNorm = 5.5081, lr_0 = 1.0227e-04
+Loss = 8.3842e-01, PNorm = 110.2231, GNorm = 1.6103, lr_0 = 1.0434e-04
+Loss = 5.8085e-01, PNorm = 110.2370, GNorm = 1.0259, lr_0 = 1.0640e-04
+Loss = 3.1061e-01, PNorm = 110.2520, GNorm = 1.2511, lr_0 = 1.0847e-04
+Loss = 1.7038e-01, PNorm = 110.2620, GNorm = 1.7608, lr_0 = 1.1053e-04
+Loss = 1.1973e-01, PNorm = 110.2709, GNorm = 0.9342, lr_0 = 1.1260e-04
+Loss = 9.7890e-02, PNorm = 110.2783, GNorm = 2.5605, lr_0 = 1.1466e-04
+Loss = 8.9379e-02, PNorm = 110.2842, GNorm = 0.5516, lr_0 = 1.1673e-04
+Loss = 8.1526e-02, PNorm = 110.2903, GNorm = 2.6000, lr_0 = 1.1879e-04
+Loss = 7.0663e-02, PNorm = 110.2958, GNorm = 0.7336, lr_0 = 1.2086e-04
+Loss = 6.6245e-02, PNorm = 110.3019, GNorm = 0.6296, lr_0 = 1.2292e-04
+Loss = 6.3424e-02, PNorm = 110.3076, GNorm = 1.0078, lr_0 = 1.2499e-04
+Loss = 6.1229e-02, PNorm = 110.3132, GNorm = 2.0382, lr_0 = 1.2705e-04
+Loss = 5.7043e-02, PNorm = 110.3189, GNorm = 1.4747, lr_0 = 1.2912e-04
+Loss = 5.4550e-02, PNorm = 110.3245, GNorm = 0.8559, lr_0 = 1.3118e-04
+Loss = 5.0311e-02, PNorm = 110.3307, GNorm = 1.4242, lr_0 = 1.3325e-04
+Loss = 5.1004e-02, PNorm = 110.3372, GNorm = 1.1464, lr_0 = 1.3531e-04
+Loss = 4.9037e-02, PNorm = 110.3434, GNorm = 0.5065, lr_0 = 1.3738e-04
+Loss = 4.3506e-02, PNorm = 110.3503, GNorm = 0.5728, lr_0 = 1.3944e-04
+Loss = 4.6023e-02, PNorm = 110.3571, GNorm = 1.4486, lr_0 = 1.4151e-04
+Loss = 5.0607e-02, PNorm = 110.3637, GNorm = 1.0032, lr_0 = 1.4358e-04
+Loss = 4.9416e-02, PNorm = 110.3703, GNorm = 0.9106, lr_0 = 1.4564e-04
+Loss = 4.3850e-02, PNorm = 110.3767, GNorm = 1.4915, lr_0 = 1.4771e-04
+Loss = 4.2076e-02, PNorm = 110.3832, GNorm = 1.6359, lr_0 = 1.4977e-04
+Loss = 3.8896e-02, PNorm = 110.3898, GNorm = 0.7140, lr_0 = 1.5184e-04
+Loss = 4.1066e-02, PNorm = 110.3963, GNorm = 0.8919, lr_0 = 1.5390e-04
+Loss = 3.6516e-02, PNorm = 110.4016, GNorm = 0.7615, lr_0 = 1.5597e-04
+Loss = 4.0343e-02, PNorm = 110.4075, GNorm = 0.4179, lr_0 = 1.5803e-04
+Loss = 3.6319e-02, PNorm = 110.4135, GNorm = 1.1651, lr_0 = 1.6010e-04
+Loss = 3.8838e-02, PNorm = 110.4197, GNorm = 0.4647, lr_0 = 1.6216e-04
+Loss = 3.5067e-02, PNorm = 110.4259, GNorm = 0.2520, lr_0 = 1.6423e-04
+Loss = 3.3513e-02, PNorm = 110.4337, GNorm = 0.4266, lr_0 = 1.6629e-04
+Loss = 3.1408e-02, PNorm = 110.4407, GNorm = 0.5709, lr_0 = 1.6836e-04
+Loss = 3.2847e-02, PNorm = 110.4477, GNorm = 0.3202, lr_0 = 1.7042e-04
+Loss = 3.4456e-02, PNorm = 110.4550, GNorm = 0.1996, lr_0 = 1.7249e-04
+Loss = 3.5503e-02, PNorm = 110.4612, GNorm = 1.3997, lr_0 = 1.7455e-04
+Loss = 3.4968e-02, PNorm = 110.4689, GNorm = 1.2583, lr_0 = 1.7662e-04
+Loss = 3.2296e-02, PNorm = 110.4760, GNorm = 0.4525, lr_0 = 1.7868e-04
+Loss = 2.8481e-02, PNorm = 110.4820, GNorm = 0.2760, lr_0 = 1.8075e-04
+Loss = 3.4183e-02, PNorm = 110.4879, GNorm = 0.7042, lr_0 = 1.8281e-04
+Loss = 3.1889e-02, PNorm = 110.4937, GNorm = 1.1407, lr_0 = 1.8488e-04
+Loss = 3.9639e-02, PNorm = 110.5012, GNorm = 1.4265, lr_0 = 1.8694e-04
+Loss = 3.2473e-02, PNorm = 110.5101, GNorm = 0.7412, lr_0 = 1.8901e-04
+Loss = 3.2185e-02, PNorm = 110.5174, GNorm = 0.5804, lr_0 = 1.9107e-04
+Loss = 2.9174e-02, PNorm = 110.5242, GNorm = 0.9752, lr_0 = 1.9314e-04
+Loss = 3.0244e-02, PNorm = 110.5325, GNorm = 0.1956, lr_0 = 1.9520e-04
+Loss = 3.0419e-02, PNorm = 110.5406, GNorm = 0.3751, lr_0 = 1.9727e-04
+Loss = 3.1226e-02, PNorm = 110.5493, GNorm = 0.3900, lr_0 = 1.9933e-04
